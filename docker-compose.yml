@@ -1,0 +1,45 @@
+# 3-node RaftKV cluster + Prometheus.
+#   docker compose up -d --build
+#   docker compose run --rm bench -matrix -markdown
+#   docker compose kill n1          # crash a node; watch failover in Prometheus
+# Scale to 5 nodes by uncommenting n4/n5 and adding them to NODES.
+x-node: &node
+  build: .
+  image: raftkv:latest
+  restart: unless-stopped
+  environment:
+    NODES: n1=n1:7000,n2=n2:7000,n3=n3:7000
+
+services:
+  n1:
+    <<: *node
+    command: -id n1 -listen :7000 -metrics :9100 -dir /data -shards 8 -nodes n1=n1:7000,n2=n2:7000,n3=n3:7000
+    volumes: [n1-data:/data]
+    ports: ["7001:7000"]
+  n2:
+    <<: *node
+    command: -id n2 -listen :7000 -metrics :9100 -dir /data -shards 8 -nodes n1=n1:7000,n2=n2:7000,n3=n3:7000
+    volumes: [n2-data:/data]
+    ports: ["7002:7000"]
+  n3:
+    <<: *node
+    command: -id n3 -listen :7000 -metrics :9100 -dir /data -shards 8 -nodes n1=n1:7000,n2=n2:7000,n3=n3:7000
+    volumes: [n3-data:/data]
+    ports: ["7003:7000"]
+
+  bench:
+    image: raftkv:latest
+    profiles: [tools]
+    entrypoint: ["raftkv-bench", "-addrs", "n1:7000,n2:7000,n3:7000"]
+    depends_on: [n1, n2, n3]
+
+  prometheus:
+    image: prom/prometheus:v2.54.1
+    volumes: [./deploy/prometheus.yml:/etc/prometheus/prometheus.yml:ro]
+    ports: ["9090:9090"]
+    depends_on: [n1, n2, n3]
+
+volumes:
+  n1-data:
+  n2-data:
+  n3-data:

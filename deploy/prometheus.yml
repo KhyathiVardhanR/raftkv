@@ -1,0 +1,15 @@
+global:
+  scrape_interval: 2s
+
+scrape_configs:
+  - job_name: raftkv
+    static_configs:
+      - targets: ["n1:9100", "n2:9100", "n3:9100"]
+
+# Useful queries:
+#   sum(rate(raftkv_kv_requests_total{code="OK"}[30s]))                       throughput
+#   histogram_quantile(0.99, sum by (le, op) (rate(raftkv_kv_request_duration_seconds_bucket[1m])))
+#   histogram_quantile(0.99, sum by (le) (rate(raftkv_raft_commit_latency_seconds_bucket[1m])))   replication latency
+#   sum by (instance) (raftkv_raft_is_leader)                                  leader balance
+#   increase(raftkv_raft_elections_total[5m])                                  elections / failovers
+#   rate(process_cpu_seconds_total[1m]), process_resident_memory_bytes, raftkv_lsm_disk_bytes
