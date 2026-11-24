@@ -1,0 +1,25 @@
+2026/11/24 13:44:08 trial  0: SIGKILL n2 (leader of shard 7, term 1) -> new leader after 289ms, first write after 353ms
+2026/11/24 13:44:09 trial  1: SIGKILL n1 (leader of shard 6, term 1) -> new leader after 350ms, first write after 505ms
+2026/11/24 13:44:10 trial  2: SIGKILL n3 (leader of shard 6, term 2) -> new leader after 241ms, first write after 348ms
+2026/11/24 13:44:11 trial  3: SIGKILL n1 (leader of shard 4, term 3) -> new leader after 310ms, first write after 347ms
+2026/11/24 13:44:13 trial  4: SIGKILL n2 (leader of shard 7, term 3) -> new leader after 208ms, first write after 335ms
+2026/11/24 13:44:14 trial  5: SIGKILL n3 (leader of shard 0, term 3) -> new leader after 301ms, first write after 502ms
+2026/11/24 13:44:15 trial  6: SIGKILL n1 (leader of shard 2, term 3) -> new leader after 287ms, first write after 349ms
+2026/11/24 13:44:16 trial  7: SIGKILL n2 (leader of shard 1, term 6) -> new leader after 248ms, first write after 329ms
+2026/11/24 13:44:17 trial  8: SIGKILL n1 (leader of shard 4, term 6) -> new leader after 394ms, first write after 501ms
+2026/11/24 13:44:18 trial  9: SIGKILL n3 (leader of shard 0, term 6) -> new leader after 399ms, first write after 513ms
+2026/11/24 13:44:20 trial 10: SIGKILL n2 (leader of shard 2, term 6) -> new leader after 266ms, first write after 335ms
+2026/11/24 13:44:21 trial 11: SIGKILL n1 (leader of shard 7, term 7) -> new leader after 235ms, first write after 339ms
+2026/11/24 13:44:22 trial 12: SIGKILL n3 (leader of shard 1, term 10) -> new leader after 228ms, first write after 337ms
+2026/11/24 13:44:23 trial 13: SIGKILL n2 (leader of shard 2, term 9) -> new leader after 311ms, first write after 362ms
+2026/11/24 13:44:25 trial 14: SIGKILL n3 (leader of shard 7, term 10) -> new leader after 363ms, first write after 514ms
+2026/11/24 13:44:26 trial 15: SIGKILL n1 (leader of shard 5, term 9) -> new leader after 266ms, first write after 337ms
+2026/11/24 13:44:27 trial 16: SIGKILL n2 (leader of shard 2, term 11) -> new leader after 269ms, first write after 341ms
+2026/11/24 13:44:28 trial 17: SIGKILL n3 (leader of shard 0, term 12) -> new leader after 320ms, first write after 340ms
+2026/11/24 13:44:29 trial 18: SIGKILL n1 (leader of shard 2, term 13) -> new leader after 304ms, first write after 341ms
+2026/11/24 13:44:30 trial 19: SIGKILL n2 (leader of shard 5, term 12) -> new leader after 290ms, first write after 371ms
+### Leader failover, 3 nodes (SIGKILL under load)
+new leader elected           n=20  min=208ms  p50=289ms  p95=394ms  max=399ms
+first successful write       n=20  min=329ms  p50=347ms  p95=513ms  max=514ms
+2026/11/24 13:44:30 checking linearizability of 15531 operations (0 indeterminate puts)...
+linearizability (Porcupine) over 15531 ops across 20 leader kills: Ok
